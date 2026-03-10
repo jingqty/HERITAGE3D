@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CMLG-3D</title>
+    <meta property="og:description" content="The Albay Heritage Map" />
+    <meta charset='utf-8'>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <script src="dist/maplibre-gl.js"></script>
+   <link href="dist/maplibre-gl.css" rel="stylesheet" />
+   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+   <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+   
+    <link rel='stylesheet' href="./style.css"  />
+</head>
+
+<body>
+    <script src="./three/build/three.min.js"></script>
+    <script src="./three/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="./three/examples/js/controls/OrbitControls.js"></script>
+    
+
+<!-- WELCOME SCREEN -->
+<div id="welcome-overlay" class="welcome">
+    <div class="background-container">
+        <img src="./icons/images/ancestral.jpg" class="background">
+        <!-- <img src="./icons/backgrounds.png" class="top-image"> -->
+    </div>
+    <div class="foreground">
+        <img src="./icons/logo.png" alt="Logo" class="logo">
+        <div id="welcome-overlay-text" class="welcome-overlay-text">
+            <img src="./icons/tourism.png" alt="Logo" class="tourism">
+            <h1 class="welcomeTitle">HERITAGE3D</h1>
+            <p class="welcomeSubtitle"> <br> <br> the heritage <br> town of albay</p>
+        </div>
+        <button id="hideButton" class="discover">DISCOVER</button>
+    </div>
+</div>
+
+<!-- MAP -->
+    <div  id="map">
+       <script src="./main.js"></script>
+    </div>
+
+<!--MENUWHEEL-->
+<div>
+    <input type="image" src="icons/menu.svg" id="btn" onclick="clickedMenu();changeImage(this)"/>
+    <div id="myMenu" class="menu">
+        <div class="menu-content">
+            <a id="menuCMG1">ST. JOHN THE BAPTIST CHURCH</a>
+            <a id="menuCMG2">MUNICIPAL HALL</a>
+            <a id="menuCMG3">NUYDA ANCESTRAL HOUSE</a>
+            <a id="menuCMG4">MELBA MOYO ANCESTRAL HOUSE</a>
+            <a id="menuCMG5">GONZALES ANCESTRAL HOUSE</a>
+            <a id="menuCMG6">RIZAL MONUMENT</a>
+        </div>
+
+<!-- Land Use Legend -->
+<div class="legend">
+    <div class="legend-content">
+        <h2>LAND USE LEGEND</h2>
+        <div class="legend-items">
+            <div class="legend-item">
+                <span class="color-box core-zone"></span>
+                <span class="label">Heritage Town Core Zone</span>
+            </div>
+            <div class="legend-item">
+                <span class="color-box buffer-zone"></span>
+                <span class="label">Heritage Town Buffer Zone</span>
+            </div>
+            <div class="legend-item">
+                <span class="color-box greenspace"></span>
+                <span class="label">Greenspace</span>
+            </div>
+            <div class="legend-item">
+                <span class="color-box cultural-zone"></span>
+                <span class="label">Cultural Heritage Zone</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--onHover Title-->
+<div id="model-overlay">
+    <div id="model-info" class="model-info">
+        <div id="model-name" class="model-name"></div>
+    </div>
+</div>
+
+<!-- MODEL VIEWER -->
+<div id="model-viewer-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000;" ></div>
+
+</body>
+</html>

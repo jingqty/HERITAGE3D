@@ -1,0 +1,624 @@
+@font-face{
+    font-family: Maragsa;
+    src: url('Maragsâ-Display.otf');
+  }
+  
+@font-face{
+    font-family: Mont;
+    src: url('Mont-Heavy.otf');
+}
+
+@font-face{
+    font-family: Kagitingan;
+    src: url('Kagitingan_Bold.otf');
+}
+
+@font-face{
+    font-family: Bantayog;
+    src: url('Bantayog_Regular.otf');
+}
+
+@keyframes fadeInUp {
+    0% {
+        transform: translate3d(0,60px,0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate3d(0,0,0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+body { 
+    margin: 0; 
+    padding: 0;
+}
+
+html, body, #map { 
+    position: fixed;
+    top: 0%;   
+    left: 0%;
+    width: 100%; 
+    height: 100%;
+}
+
+/* Welcome Screen*/
+.welcome {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(227, 213, 191, 0.804);
+}
+
+.background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e3d5bfec;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 94%;
+    transform: translateY(-50%);
+    object-fit: cover;
+    z-index: 2;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.foreground {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: opacity 1s ease-out;
+}
+
+#welcome-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease-out;
+}
+
+.logo {
+    height: 150px;
+    width: 150px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.tourism {
+    height: 200px;
+    width: 200px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.welcome-overlay-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcomeTitle {
+    font-family: Mont;
+    font-size: 9rem;
+    letter-spacing: 1px;
+    color: #ffffff;
+    font-weight: normal;
+    margin-top: 10px;
+    margin-bottom: 0%;
+    animation: fadeInUp 1s ease-out;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.welcomeSubtitle {
+    font-family: Bantayog;
+    font-size: 2rem;
+    color: #ffffff;
+    margin-top: 0%;
+    text-align: left;
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.discover {
+    font-family: Bantayog;
+    margin-top: 50px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #ffffff53;
+    color: #f1f0ec;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    animation: fadeInUp 1.8s ease-out;
+    transition: transform 0.3s ease;
+}
+
+.discover:hover {
+    transform: scale(1.05);
+}
+
+/* Option Wheel */
+input {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 5;
+}
+
+/* The Overlay (background) */
+.menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    transition: 0.7s;
+    max-width: 100%;
+}
+
+.menu-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    top: 20px;
+    left: 120px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.menu a {
+    padding: 8px;
+    text-decoration: none;
+    font-family: Maragsa;
+    font-size: 8rem;
+    color: #000000;
+    display: block;
+    transition: 0.3s;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.menu a:hover, .menu a:focus {
+    color: #e5de36;
+    cursor: pointer;
+}
+
+.model-info {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.3);
+    padding: 0;
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: 1000;
+    font-family: Maragsa;
+    font-size: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    opacity: 0;
+    transition: opacity 1s ease;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.model-info.show {
+    opacity: 1;
+}
+
+.model-info.hide {
+    opacity: 0;
+}
+
+/* THE MODEL VIEWER */
+#model-viewer-container {
+    background-color: rgba(242, 240, 235, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#model-viewer-container model-viewer {
+    width: 100%;
+    height: 100%;
+    background-color: #f2f0eb;
+    --poster-color: #f2f0eb;
+}
+
+#close-button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+}
+
+.close-button {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close-button:hover {
+    transform: scale(1.1);
+}
+
+#model-description {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px;
+    max-width: 95%;
+    text-align: justify;
+    text-justify: inter-word;
+    z-index: 1001;
+}
+
+.model-description h2 {
+    font-family: Maragsa;
+    font-size: 4rem;
+    font-weight: normal;
+    color: #232020;
+    margin: 0 0 10px 0;
+}
+
+.model-description p {
+    font-family: Bantayog;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    margin: 0;
+}
+
+
+/* Legend Container */
+.legend {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+.legend-content {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    min-width: 220px;
+}
+
+/* Legend Header */
+.legend h2 {
+    font-family: Maragsa;
+    font-size: 1rem;
+    color: #232020;
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Legend Items */
+.legend-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Color Boxes */
+.color-box {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.core-zone {
+    background-color: #008ab7;
+}
+
+.buffer-zone {
+    background-color: #6ec1dc;
+}
+
+.greenspace {
+    background-color: #5d7d00;
+}
+
+.cultural-zone {
+    background-color: #beff7f;
+}
+
+/* Legend Labels */
+.label {
+    font-family: Bantayog;
+    font-size: 0.9rem;
+    color: #232020;
+}
+
+/* Large screens (1200px and up) */
+@media screen and (min-width: 1200px) {
+    .menu-content {
+        left: 150px;
+    }
+    .logo {
+        height: 180px;
+        width: 180px;
+    }
+    .tourism {
+        height: 230px;
+        width: 230px;
+    }
+}
+
+/* Desktop and Laptop */
+@media screen and (max-width: 1024px) {
+    .welcomeTitle {
+        font-size: 6rem;
+    }
+    .menu a {
+        font-size: 6rem;
+    }
+    .model-info {
+        font-size: 6rem;
+    }
+    .logo {
+        height: 130px;
+        width: 130px;
+    }
+    .tourism {
+        height: 180px;
+        width: 180px;
+    }
+}
+
+/* Tablets */
+@media screen and (max-width: 768px) {
+    .welcomeTitle {
+        font-size: 4rem;
+    }
+    .welcomeSubtitle {
+        font-size: 1.2rem;
+    }
+    .menu-content {
+        left: 20px;
+        margin-top: 60px;
+    }
+    .menu a {
+        font-size: 4rem;
+        padding: 4px;
+    }
+    .model-info {
+        font-size: 4rem;
+    }
+    .model-description {
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        max-width: none;
+        padding: 15px;
+    }
+    .model-description h2 {
+        font-size: 2.5rem;
+    }
+    .model-description p {
+        font-size: 0.9rem;
+    }
+    .logo {
+        height: 100px;
+        width: 100px;
+    }
+    .tourism {
+        height: 150px;
+        width: 150px;
+    }
+    .welcome-overlay-text {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .legend {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .legend-content {
+        padding: 12px;
+        min-width: 200px;
+    }
+
+    .legend h2 {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    .label {
+        font-size: 0.8rem;
+    }
+
+    .color-box {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Mobile Landscape */
+@media screen and (max-width: 640px) {
+    .welcomeTitle {
+        font-size: 3rem;
+    }
+    .welcomeSubtitle {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    .menu a {
+        font-size: 3rem;
+    }
+    .model-info {
+        font-size: 3rem;
+    }
+    .model-description h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile Portrait */
+@media screen and (max-width: 480px) {
+    .welcomeTitle {
+        font-size: 2.5rem;
+    }
+    .welcomeSubtitle {
+        font-size: 1rem;
+    }
+    .menu a {
+        font-size: 2.5rem;
+        padding: 8px 4px;
+    }
+    .model-info {
+        font-size: 2.5rem;
+    }
+    .logo {
+        height: 80px;
+        width: 80px;
+    }
+    .tourism {
+        height: 120px;
+        width: 120px;
+    }
+    .discover {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+    .menu-content {
+        margin-top: 40px;
+    }
+    .legend {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .legend-content {
+        padding: 10px;
+        min-width: 180px;
+    }
+
+    .legend h2 {
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+    }
+
+    .label {
+        font-size: 0.75rem;
+    }
+
+    .color-box {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* Small Mobile Devices */
+@media screen and (max-width: 320px) {
+    .welcomeTitle {
+        font-size: 2rem;
+    }
+    .welcomeSubtitle {
+        font-size: 0.9rem;
+    }
+    .menu a {
+        font-size: 2rem;
+    }
+    .model-info {
+        font-size: 2rem;
+    }
+    .logo {
+        height: 60px;
+        width: 60px;
+    }
+    .tourism {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+/* Height-based Media Queries */
+@media screen and (max-height: 600px) {
+    .logo {
+        height: 60px;
+        width: 60px;
+    }
+    .tourism {
+        height: 100px;
+        width: 100px;
+    }
+    .welcomeTitle {
+        margin-top: 5px;
+    }
+    .discover {
+        margin-top: 20px;
+    }
+}
+
+/* For devices in landscape mode */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .welcome-overlay-text {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+    .welcomeTitle {
+        margin: 0;
+    }
+    .logo {
+        height: 50px;
+        width: 50px;
+    }
+    .tourism {
+        height: 80px;
+        width: 80px;
+    }
+}
+
+/* Hide legend when model viewer is open */
+#model-viewer-container:not([style*="display: none"]) ~ .legend {
+    display: none;
+}
