@@ -25,15 +25,15 @@ This project was our undergraduate thesis to digitally document and present loca
 ## Built With
 
 The system was built using the following workflow:
+
 **Mapping Framework:** MapLibre GL JS ![MapLibre](https://img.shields.io/badge/MapLibre-GL%20JS-blue?style=for-the-badge&logo=maplibre&logoColor=white)
 
 **Base Map Data:** OpenStreetMap ![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-Data-green?style=for-the-badge&logo=openstreetmap&logoColor=white)
 
 **3D Model Creation:** RealityCapture ![RealityCapture](https://img.shields.io/badge/RealityCapture-Photogrammetry-red?style=for-the-badge)
 
-**3D Web Graphics:** Three.JS and ModelViewer  
-![Three.js](https://img.shields.io/badge/Three.js-WebGL-black?style=for-the-badge&logo=three.js)
-![ModelViewer](https://img.shields.io/badge/ModelViewer-3D%20Web-orange?style=for-the-badge)
+**3D Web Graphics:** Three.JS  ![Three.js](https://img.shields.io/badge/Three.js-WebGL-black?style=for-the-badge&logo=three.js)
+                    ModelViewer ![ModelViewer](https://img.shields.io/badge/ModelViewer-3D%20Web-orange?style=for-the-badge)
 
 The system integrates spatial data from OpenStreetMap into a 3D web map built with MapLibre GL JS. Cultural heritage structures were documented through onsite surveys, where exterior facade images were captured using a digital camera. These images were processed in RealityCapture to generate detailed 3D models. The models were then georeferenced and positioned within the web-based map to accurately represent their real-world locations.
 
